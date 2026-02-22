@@ -1,10 +1,16 @@
 {
   "name": "makoki-visualizer",
   "displayName": "Makoki Visualizer",
-  "description": "Visual reader and editor for YAML and JSON",
+  "description": "View and edit YAML and JSON as an interactive tree. Search, filter, and edit values inline.",
   "version": "0.1.0",
-  "engines": { "vscode": "^1.75.0" },
-  "categories": ["Other"],
+  "publisher": "makoki",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nangui/makoki-visualizer"
+  },
+  "keywords": ["yaml", "json", "jsonc", "tree", "visualizer", "editor", "config"],
+  "engines": { "vscode": "^1.109.0" },  "categories": ["Other", "Formatters", "Visualization"],
   "main": "./out/extension.js",
   "activationEvents": ["onCommand:makoki.openVisualizer", "onStartupFinished", "onLanguage:yaml", "onLanguage:json", "onLanguage:jsonc"],
   "contributes": {

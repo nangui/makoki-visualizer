@@ -5,5 +5,8 @@
     "build": "pnpm -r run build",
     "dev": "pnpm -r run dev",
     "typecheck": "pnpm -r run typecheck"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.7.1"
   }
 }

@@ -54,6 +54,8 @@ pnpm --filter makoki-visualizer build
 
 In the panel you can browse the tree, **search** (filter by key or value), and **double‑click** a scalar value to edit it inline (saves back to the document).
 
+For **packaging** (`.vsix`) and **publishing** to the VS Code Marketplace, see [docs/publishing.md](docs/publishing.md).
+
 ## Tech stack
 
 - **Language:** TypeScript
