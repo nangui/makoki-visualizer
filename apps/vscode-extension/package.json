@@ -1,22 +1,55 @@
 {
-  "name": "vscode-extension",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "makoki-visualizer",
+  "displayName": "Makoki Visualizer",
+  "description": "Visual reader and editor for YAML and JSON",
+  "version": "0.1.0",
+  "engines": { "vscode": "^1.75.0" },
+  "categories": ["Other"],
+  "main": "./out/extension.js",
+  "activationEvents": ["onCommand:makoki.openVisualizer", "onStartupFinished", "onLanguage:yaml", "onLanguage:json", "onLanguage:jsonc"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "makoki.openVisualizer",
+        "title": "Active MV",
+        "icon": "$(preview)",
+        "category": "Makoki Visualizer"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "makoki.openVisualizer",
+          "when": "editorLangId == yaml || editorLangId == json || editorLangId == jsonc",
+          "group": "navigation",
+          "title": "Active MV"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "makoki.openVisualizer",
+          "when": "editorLangId == yaml || editorLangId == json || editorLangId == jsonc",
+          "group": "1_modification",
+          "title": "Open with Makoki Visualizer"
+        }
+      ]
+    }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.30.0",
+  "scripts": {
+    "build": "npm run build:ext && npm run build:webview",
+    "build:ext": "esbuild src/extension/extension.ts --bundle --outfile=out/extension.js --platform=node --format=cjs --external:vscode --external:jsonc-parser --external:yaml",
+    "build:webview": "esbuild src/webview/index.ts --bundle --outfile=out/webview.js --platform=browser --format=esm",
+    "clean": "rm -rf out",
+    "test": "echo \"No test specified\" && exit 0"
+  },
   "devDependencies": {
+    "@types/node": "^22.10.0",
     "@types/vscode": "^1.109.0",
-    "@vscode/vsce": "^3.7.1",
     "esbuild": "^0.27.3",
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "core": "workspace:*",
     "jsonc-parser": "^3.3.1",
     "yaml": "^2.8.2"
   }
