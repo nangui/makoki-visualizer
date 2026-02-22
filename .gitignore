@@ -1,0 +1,7 @@
+node_modules
+dist
+out
+*.js
+!*.config.js
+!sw.js
+docs/
