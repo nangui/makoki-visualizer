@@ -98,6 +98,8 @@ function jsoncNodeToTreeNode(
         type,
         value: value as string | number | boolean | null,
         line: lineFromOffset(node.offset, node.offset + node.length),
+        rangeStart: node.offset,
+        rangeEnd: node.offset + node.length,
       };
     }
     default:

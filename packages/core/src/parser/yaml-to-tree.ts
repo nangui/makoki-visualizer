@@ -32,7 +32,7 @@ export interface ParseYamlError {
 /** Parses YAML string; supports multi-document. Returns roots and errors (partial AST on error). */
 export function parseYaml(content: string): ParseYamlResult {
   const errors: ParseYamlError[] = [];
-  const docs = parseAllDocuments(content, { strict: false });
+  const docs = parseAllDocuments(content, { strict: false, keepSourceTokens: true });
 
   for (const doc of docs) {
     for (const err of doc.errors) {
@@ -100,7 +100,8 @@ function anyNodeToTreeNode(
     const nodeType = scalarTypeOf(value);
     const comment = (scalar as unknown as { comment?: string }).comment;
     const commentBefore = (scalar as unknown as { commentBefore?: string }).commentBefore;
-    return {
+    const range = (scalar as unknown as { range?: [number, number, number] }).range;
+    const out: TreeNode = {
       id,
       key,
       type: nodeType,
@@ -110,6 +111,11 @@ function anyNodeToTreeNode(
       tag: scalar.tag ? String(scalar.tag) : undefined,
       anchor: scalar.anchor ? String(scalar.anchor) : undefined,
     };
+    if (range && Array.isArray(range) && range.length >= 3 && typeof range[0] === 'number' && typeof range[2] === 'number') {
+      out.rangeStart = range[0];
+      out.rangeEnd = range[2];
+    }
+    return out;
   }
 
   if (isMap(node)) {
