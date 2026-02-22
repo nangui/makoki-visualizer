@@ -23,3 +23,9 @@ export {
   treeToJson,
   type SerializeFormat,
 } from './serializer/index.js';
+
+export {
+  registerComponents,
+  MvNodeElement,
+  MvTreeElement,
+} from './components/index.js';
