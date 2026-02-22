@@ -30,6 +30,10 @@ export interface TreeNode {
   collapsed?: boolean;
   /** Source line number for round-trip mapping. */
   line?: number;
+  /** Character offset in source (start). Used for minimal edit in JSON/JSONC. */
+  rangeStart?: number;
+  /** Character offset in source (end). Used for minimal edit in JSON/JSONC. */
+  rangeEnd?: number;
 
   // --- Round-trip preservation (YAML/JSONC) ---
   /** Comment(s) above the key (YAML). */
