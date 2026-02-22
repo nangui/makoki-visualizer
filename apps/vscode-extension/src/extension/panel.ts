@@ -5,12 +5,6 @@ import { subscribeToDocumentChanges } from './sync.js';
 
 let currentPanel: vscode.WebviewPanel | undefined;
 let currentDocumentUri: vscode.Uri | undefined;
-let outputChannel: vscode.OutputChannel | undefined;
-
-function getOutputChannel(): vscode.OutputChannel {
-  if (!outputChannel) outputChannel = vscode.window.createOutputChannel('Makoki Visualizer');
-  return outputChannel;
-}
 
 export function createOrShowPanel(
   context: vscode.ExtensionContext,
@@ -41,12 +35,7 @@ export function createOrShowPanel(
   sendParsedContent(currentPanel.webview, document);
 
   currentPanel.webview.onDidReceiveMessage(
-    (msg: { type: string; id?: string; value?: string | number | boolean | null; message?: string }) => {
-      if (msg.type === 'log' && typeof msg.message === 'string') {
-        const channel = getOutputChannel();
-        channel.appendLine(`[Webview] ${msg.message}`);
-        channel.show(true);
-      }
+    (msg: { type: string; id?: string; value?: string | number | boolean | null }) => {
       if (msg.type === 'edit' && msg.id != null && msg.value !== undefined) {
         handleEditRequest(msg.id, msg.value);
       }

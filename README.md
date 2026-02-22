@@ -25,17 +25,34 @@ makoki-visualizer/
 - Node.js 18+
 - [pnpm](https://pnpm.io) 9+
 
-## Commands
+## Install & build
 
 From the repo root:
 
 ```bash
 pnpm install
-pnpm build          # Build all packages
-pnpm --filter core build
-pnpm --filter vscode-extension build
-pnpm --filter web build
+pnpm build          # Build all packages (core + apps)
+pnpm --filter core run test   # Run core tests
 ```
+
+To build only the extension:
+
+```bash
+pnpm --filter makoki-visualizer build
+# or from apps/vscode-extension: pnpm run build
+```
+
+## Development (VS Code extension)
+
+1. Build the project: `pnpm run build`
+2. Open the repo in VS Code (or Cursor).
+3. Press **F5** (or **Run > Start Debugging**) to launch an Extension Development Host window.
+4. In the new window, open a `.yaml`, `.json` or `.jsonc` file.
+5. Open the visualizer:
+   - **Editor title bar:** click the **Active MV** (preview) button, or  
+   - **Context menu:** right‑click in the editor → **Open with Makoki Visualizer**.
+
+In the panel you can browse the tree, **search** (filter by key or value), and **double‑click** a scalar value to edit it inline (saves back to the document).
 
 ## Tech stack
 

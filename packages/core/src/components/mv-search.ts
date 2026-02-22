@@ -65,9 +65,6 @@ export class MvSearchElement extends HTMLElement {
 
   private emitSearch(): void {
     const query = this.input?.value?.trim() ?? '';
-    try {
-      console.log('[Makoki mv-search] emit', JSON.stringify(query));
-    } catch (_) {}
     this.dispatchEvent(
       new CustomEvent(MvSearchEventName, {
         detail: { query },

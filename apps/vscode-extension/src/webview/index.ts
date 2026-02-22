@@ -42,37 +42,16 @@ function renderRoots(roots: unknown[], isReadonly?: boolean): void {
   }
 }
 
-function logToExtension(message: string): void {
-  if (vscode) {
-    try {
-      vscode.postMessage({ type: 'log', message });
-    } catch (_) {}
-  }
-  try {
-    console.log('[Makoki]', message);
-  } catch (_) {}
-}
-
 function onSearch(e: Event): void {
   const detail = (e as CustomEvent<{ query?: string }>).detail;
   const query = detail?.query ?? '';
-  logToExtension(`mv-search event received, query="${query}"`);
   const tree = getTree();
   if (tree && 'searchQuery' in tree) {
     (tree as { searchQuery: string }).searchQuery = query;
-    logToExtension(`tree.searchQuery set to "${query}"`);
-  } else {
-    logToExtension(`tree not found or has no searchQuery, tree=${!!tree}`);
   }
 }
 
-// Attach search listener unconditionally so filtering works even if vscode API is missing
 document.addEventListener('mv-search', onSearch);
-const searchEl = document.querySelector('mv-search');
-if (searchEl) {
-  searchEl.addEventListener('mv-search', onSearch);
-}
-logToExtension('search listener attached (document + mv-search element)');
 
 if (vscode) {
   window.addEventListener('message', (event: MessageEvent) => {
