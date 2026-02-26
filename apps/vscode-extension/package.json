@@ -10,7 +10,8 @@
     "url": "https://github.com/nangui/makoki-visualizer"
   },
   "keywords": ["yaml", "json", "jsonc", "tree", "visualizer", "editor", "config"],
-  "engines": { "vscode": "^1.109.0" },  "categories": ["Other", "Formatters", "Visualization"],
+  "engines": { "vscode": "^1.75.0" },
+  "categories": ["Other", "Formatters", "Visualization"],
   "main": "./out/extension.js",
   "activationEvents": ["onCommand:makoki.openVisualizer", "onStartupFinished", "onLanguage:yaml", "onLanguage:json", "onLanguage:jsonc"],
   "contributes": {
@@ -42,15 +43,16 @@
     }
   },
   "scripts": {
+    "vscode:prepublish": "npm run build",
     "build": "npm run build:ext && npm run build:webview",
-    "build:ext": "esbuild src/extension/extension.ts --bundle --outfile=out/extension.js --platform=node --format=cjs --external:vscode --external:jsonc-parser --external:yaml",
+    "build:ext": "esbuild src/extension/extension.ts --bundle --outfile=out/extension.js --platform=node --format=cjs --external:vscode",
     "build:webview": "esbuild src/webview/index.ts --bundle --outfile=out/webview.js --platform=browser --format=esm",
     "clean": "rm -rf out",
     "test": "echo \"No test specified\" && exit 0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "@types/vscode": "^1.109.0",
+    "@types/vscode": "^1.75.0",
     "esbuild": "^0.27.3",
     "typescript": "^5.9.3"
   },
