@@ -2,7 +2,7 @@
   "name": "makoki-visualizer",
   "displayName": "Makoki Visualizer",
   "description": "View and edit YAML and JSON as an interactive tree. Search, filter, and edit values inline.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "publisher": "makoki",
   "license": "ISC",
   "repository": {
