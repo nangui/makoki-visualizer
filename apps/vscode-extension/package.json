@@ -2,8 +2,8 @@
   "name": "makoki-visualizer",
   "displayName": "Makoki Visualizer",
   "description": "View and edit YAML and JSON as an interactive tree. Search, filter, and edit values inline.",
-  "version": "0.1.2",
-  "publisher": "makoki",
+  "version": "0.1.5",
+  "publisher": "nangui",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "engines": { "vscode": "^1.75.0" },
   "categories": ["Other", "Formatters", "Visualization"],
   "main": "./out/extension.js",
-  "activationEvents": ["onCommand:makoki.openVisualizer", "onStartupFinished", "onLanguage:yaml", "onLanguage:json", "onLanguage:jsonc"],
+  "activationEvents": ["onCommand:makoki.openVisualizer", "onStartupFinished", "onLanguage:yaml", "onLanguage:yml", "onLanguage:json", "onLanguage:jsonc"],
   "contributes": {
     "commands": [
       {
@@ -27,7 +27,7 @@
       "editor/title": [
         {
           "command": "makoki.openVisualizer",
-          "when": "editorLangId == yaml || editorLangId == json || editorLangId == jsonc",
+          "when": "editorLangId == yaml || editorLangId == yml || editorLangId == json || editorLangId == jsonc",
           "group": "navigation",
           "title": "Active MV"
         }
@@ -35,7 +35,7 @@
       "editor/context": [
         {
           "command": "makoki.openVisualizer",
-          "when": "editorLangId == yaml || editorLangId == json || editorLangId == jsonc",
+          "when": "editorLangId == yaml || editorLangId == yml || editorLangId == json || editorLangId == jsonc",
           "group": "1_modification",
           "title": "Open with Makoki Visualizer"
         }
@@ -45,7 +45,7 @@
   "scripts": {
     "vscode:prepublish": "npm run build",
     "build": "npm run build:ext && npm run build:webview",
-    "build:ext": "esbuild src/extension/extension.ts --bundle --outfile=out/extension.js --platform=node --format=cjs --external:vscode",
+    "build:ext": "esbuild src/extension/extension.ts --bundle --outfile=out/extension.js --platform=node --format=cjs --main-fields=module,main --external:vscode",
     "build:webview": "esbuild src/webview/index.ts --bundle --outfile=out/webview.js --platform=browser --format=esm",
     "clean": "rm -rf out",
     "test": "echo \"No test specified\" && exit 0"

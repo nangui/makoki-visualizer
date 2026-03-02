@@ -1,10 +1,8 @@
 import * as vscode from 'vscode';
-import { createOrShowPanel } from './panel.js';
 
 export function activate(context: vscode.ExtensionContext): void {
-  try {
-    context.subscriptions.push(
-      vscode.commands.registerCommand('makoki.openVisualizer', () => {
+  context.subscriptions.push(
+    vscode.commands.registerCommand('makoki.openVisualizer', async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
         vscode.window.showInformationMessage('Open a YAML or JSON file first.');
@@ -12,19 +10,21 @@ export function activate(context: vscode.ExtensionContext): void {
       }
       const doc = editor.document;
       const lang = doc.languageId;
-      if (lang !== 'yaml' && lang !== 'json' && lang !== 'jsonc') {
+      if (lang !== 'yaml' && lang !== 'yml' && lang !== 'json' && lang !== 'jsonc') {
         vscode.window.showInformationMessage('Makoki Visualizer supports YAML and JSON only.');
         return;
       }
-      createOrShowPanel(context, doc);
+      try {
+        const panelModule = await import('./panel.js');
+        panelModule.createOrShowPanel(context, doc);
+      } catch (err) {
+        console.error('[Makoki Visualizer] command execution failed:', err);
+        void vscode.window.showErrorMessage(
+          'Makoki Visualizer failed to open: ' + (err instanceof Error ? err.message : String(err))
+        );
+      }
     })
-    );
-  } catch (err) {
-    console.error('[Makoki Visualizer] activate failed:', err);
-    void vscode.window.showErrorMessage(
-      'Makoki Visualizer failed to activate: ' + (err instanceof Error ? err.message : String(err))
-    );
-  }
+  );
 }
 
 export function deactivate(): void {}

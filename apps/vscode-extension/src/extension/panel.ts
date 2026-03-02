@@ -95,7 +95,7 @@ function sendParsedContent(webview: vscode.Webview, document: vscode.TextDocumen
   if (document.isClosed) return;
   const text = document.getText();
   const lang = document.languageId;
-  const format: SerializeFormat = lang === 'yaml' ? 'yaml' : 'json';
+  const format: SerializeFormat = lang === 'yaml' || lang === 'yml' ? 'yaml' : 'json';
   const result = format === 'yaml' ? parseYaml(text) : parseJsonc(text);
   const isReadonly = (document as { isReadonly?: boolean }).isReadonly ?? false;
   webview.postMessage({
@@ -118,7 +118,7 @@ async function handleEditRequest(nodeId: string, value: string | number | boolea
   const text = doc.getText();
   const textLen = text.length;
   const lang = doc.languageId;
-  const format: SerializeFormat = lang === 'yaml' ? 'yaml' : 'json';
+  const format: SerializeFormat = lang === 'yaml' || lang === 'yml' ? 'yaml' : 'json';
   const result = format === 'yaml' ? parseYaml(text) : parseJsonc(text);
   const node = findNodeById(result.roots, nodeId);
   if (!node) return;

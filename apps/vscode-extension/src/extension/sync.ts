@@ -9,7 +9,7 @@ export function subscribeToDocumentChanges(
 ): vscode.Disposable {
   return vscode.workspace.onDidChangeTextDocument((e) => {
     const doc = e.document;
-    if (doc.languageId === 'yaml' || doc.languageId === 'json' || doc.languageId === 'jsonc') {
+    if (doc.languageId === 'yaml' || doc.languageId === 'yml' || doc.languageId === 'json' || doc.languageId === 'jsonc') {
       handler(doc);
     }
   });

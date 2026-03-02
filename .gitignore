@@ -6,3 +6,4 @@ out
 !*.config.js
 !sw.js
 docs/
+.DS_Store

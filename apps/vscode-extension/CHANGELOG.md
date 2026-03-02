@@ -4,6 +4,31 @@ All notable changes to the Makoki Visualizer extension will be documented in thi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.5] - 2026-03-02
+
+### Fixed
+
+- Added explicit `yml` language support across activation, command validation, parsing, and document sync.
+- Updated menu visibility and activation events to include `editorLangId == yml` and `onLanguage:yml`.
+
+## [0.1.4] - 2026-03-02
+
+### Fixed
+
+- Fixed extension activation crash in Cursor (`Cannot find module './impl/format'`) by forcing ESM-first dependency resolution during extension bundling.
+- Improved command registration reliability by lazy-loading the panel module when `makoki.openVisualizer` is executed.
+
+## [0.1.3] - 2026-03-02
+
+### Changed
+
+- Bumped extension version to `0.1.3`.
+- Produced dedicated VSIX artifacts for VS Code and Cursor distributions.
+
+### Fixed
+
+- Fixed Cursor activation failure caused by `jsonc-parser` UMD entry (`./impl/format` not found) by forcing ESM-first resolution in extension bundling.
+
 ## [0.1.2] - 2026-02-26
 
 ### Changed
