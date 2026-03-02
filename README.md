@@ -1,6 +1,6 @@
 # Makoki Visualizer
 
-Visual reader and editor for YAML and JSON files. Transforms raw config files into a readable, indented, interactive key-value tree.
+Visual reader and editor for YAML, YML, and JSON files. Transforms raw config files into a readable, indented, interactive key-value tree.
 
 ## Surfaces
 
@@ -47,7 +47,7 @@ pnpm --filter makoki-visualizer build
 1. Build the project: `pnpm run build`
 2. Open the repo in VS Code (or Cursor).
 3. Press **F5** (or **Run > Start Debugging**) to launch an Extension Development Host window.
-4. In the new window, open a `.yaml`, `.json` or `.jsonc` file.
+4. In the new window, open a `.yaml`, `.yml`, `.json` or `.jsonc` file.
 5. Open the visualizer:
    - **Editor title bar:** click the **Active MV** (preview) button, or  
    - **Context menu:** right‑click in the editor → **Open with Makoki Visualizer**.
